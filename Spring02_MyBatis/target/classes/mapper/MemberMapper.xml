@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="member">
+
+<!-- 대상이 되는 Dto의 field 명과 정확히 일치해야만 매칭이 가능하다.
+	오타날 경우 정상 동작을 기대하기 어렵다.
+ -->
+ 	<update id="update" parameterType="com.gura.Spring02.member.dto.MemberDto">
+ 		update member
+ 		set name = #{name}, addr = #{addr}
+ 		where num = #{num}
+ 	</update>
+ 	
+ 	<select id="getData" parameterType="int" resultType="com.gura.Spring02.member.dto.MemberDto">
+ 		select num, name, addr
+ 		from member
+ 		where num = #{num}
+ 	</select>
+ 	
+ 	<delete id="delete" parameterType="int">
+ 		delete from member
+ 		where num=#{num}
+ 	</delete>
+ 	<!-- ?대신 #{}으로 dto에 들어있는 정보를 매핑시켜줄 수 있다. -->
+ 	<insert id="insert" parameterType="com.gura.Spring02.member.dto.MemberDto">
+ 		Insert into member
+ 		(num, name, addr)
+ 		values(member_seq.nextval, #{name}, #{addr})
+ 	</insert>
+ 	
+	<select id="getList" resultType="com.gura.Spring02.member.dto.MemberDto">
+		SELECT num,name,addr
+		FROM member
+		ORDER BY num asc
+	</select>
+</mapper>
