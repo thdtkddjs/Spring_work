@@ -12,10 +12,14 @@
 		set pwd=#{newPwd}
 		where id=#{id}
 	</update>
-	
+	<!-- 
+		아래 외에도 jdbcType=VARCHAR로도 nullpointexception을 제거할 수 있다.
+		jdbcType 종류
+		INTEGER, BIGINT, FLOAT, DOUBLE, VARCAHR
+	 -->
 	<update id="update" parameterType="com.gura.spring04.users.dto.UsersDto">
 		update users
-		set email=#{email}, profile=#{profile}
+		set email=#{email} <if test="profile !=null">, profile=#{profile}</if>
 		where id=#{id}
 	</update>
 	
