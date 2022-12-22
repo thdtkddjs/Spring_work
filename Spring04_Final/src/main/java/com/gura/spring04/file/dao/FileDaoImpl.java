@@ -22,7 +22,7 @@ public class FileDaoImpl implements FileDao{
 	@Override
 	public FileDto getData(int num) {
 
-		FileDto dto = session.selectOne("file.getDate", num);
+		FileDto dto = session.selectOne("file.getData", num);
 		
 		return dto;
 	}
