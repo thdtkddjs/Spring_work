@@ -49,11 +49,13 @@
       <interceptor>
          <mapping path="/users/*"/>
          <mapping path="/file/*"/>
+         <mapping path="/cafe/*"/>
          <exclude-mapping path="/users/loginform"/>
          <exclude-mapping path="/users/login"/>
          <exclude-mapping path="/users/signup_form"/>
          <exclude-mapping path="/users/signup"/>
          <exclude-mapping path="/file/list"/>
+         <exclude-mapping path="/cafe/list"/>
          <beans:ref bean="loginInterceptor"/>
       </interceptor>
    </interceptors>
