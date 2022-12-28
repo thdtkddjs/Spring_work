@@ -112,7 +112,7 @@ public class UsersController {
 		return mView;
 	}
 	
-	@RequestMapping(value= "users/profile_upload", method=RequestMethod.POST)
+	@RequestMapping(value= "/users/profile_upload", method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String,Object> profileUpload(HttpServletRequest request,MultipartFile image){
 		//서비스를 이용해서 이미지를 upload폴더에 저장하고, 리턴되는 MAP을 이용해서 json문자열 응답하기

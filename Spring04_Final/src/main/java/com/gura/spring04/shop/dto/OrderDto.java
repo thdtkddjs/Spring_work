@@ -2,16 +2,16 @@ package com.gura.spring04.shop.dto;
 
 public class OrderDto {
 	private int num;
-	private String name;
+	private String id;
 	private int code;
 	private String addr;	
 	
 	public OrderDto() {}
 
-	public OrderDto(int num, String name, int code, String addr) {
+	public OrderDto(int num, String id, int code, String addr) {
 		super();
 		this.num = num;
-		this.name = name;
+		this.id = id;
 		this.code = code;
 		this.addr = addr;
 	}
@@ -24,12 +24,12 @@ public class OrderDto {
 		this.num = num;
 	}
 
-	public String getName() {
-		return name;
+	public String getid() {
+		return id;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setid(String id) {
+		this.id = id;
 	}
 
 	public int getCode() {
