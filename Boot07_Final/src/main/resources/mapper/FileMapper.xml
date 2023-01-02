@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="file">
+	<insert id="insert" parameterType="com.gura.boot07.file.dto.FileDto">
+		insert into file1
+		(num, writer, title, orgFileName, saveFileName, fileSize, regdate)
+		values(file_seq.nextval, #{writer}, #{title}, #{orgFileName}, #{saveFileName}, #{fileSize},sysdate)
+	</insert>
+	
+	<delete id="delete" parameterType="int">
+		delete from file1
+		where num=#{int}
+	</delete>
+	
+	<select id="getData" parameterType="int" resultType="com.gura.boot07.file.dto.FileDto">
+		select num, writer, title, orgFileName, saveFileName, fileSize, regdate
+		from file1
+		where num=#{int} 
+	</select>
+	
+	<select id="getList" parameterType="com.gura.boot07.file.dto.FileDto" resultType="com.gura.boot07.file.dto.FileDto">
+      SELECT *
+      FROM
+         (SELECT result1.*, ROWNUM AS rnum
+         FROM
+            (SELECT num,writer,title,orgFileName,saveFileName,
+               fileSize,regdate
+            FROM file1
+            <choose>
+            	<when test="title != null and orgFileName != null">
+            		where title like '%'||#{title}||'%' or orgFileName like '%'||#{orgFileName}||'%'
+            	</when>
+            	<when test="title != null">
+            		where title like '%'||#{title}||'%'
+            	</when>
+            	<when test="writer != null">
+            		where writer like '%'||#{writer}||'%'
+            	</when>
+            </choose>
+            ORDER BY num DESC) result1)
+      WHERE rnum BETWEEN #{startRowNum} AND #{endRowNum}
+	</select>
+	<select id="getCount" parameterType="com.gura.boot07.file.dto.FileDto" resultType="int">
+      SELECT NVL(MAX(ROWNUM), 0)
+      FROM file1
+      <choose>
+            	<when test="title != null and orgFileName != null">
+            		where title like '%'||#{title}||'%' or orgFileName like '%'||#{orgFileName}||'%'
+            	</when>
+            	<when test="title != null">
+            		where title like '%'||#{title}||'%'
+            	</when>
+            	<when test="writer != null">
+            		where writer like '%'||#{writer}||'%'
+            	</when>
+            </choose>
+   	</select>
+</mapper>

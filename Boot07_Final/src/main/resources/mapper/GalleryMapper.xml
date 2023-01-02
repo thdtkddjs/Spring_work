@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gallery">
+	
+	<insert id="insert" parameterType="com.gura.boot07.gallery.dto.GalleryDto">
+		insert into board_gallery
+		(num, writer, caption, imagePath, regdate)
+		values(board_gallery_seq.nextval, #{writer}, #{caption}, #{imagePath}, sysdate)
+	</insert>
+	
+	<update id="update" parameterType="com.gura.boot07.gallery.dto.GalleryDto">
+		update board_gallery
+		set caption=#{caption}, imagePath=#{imagePath}
+		where num=#{num}
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		delete from board_gallery
+		where num=#{int}
+	</delete>
+
+    <select id="getList" resultType="com.gura.boot07.gallery.dto.GalleryDto">
+    	select num, writer, caption, imagePath, regdate
+      	from board_gallery
+      	order by num desc
+    </select>
+      
+    <select id="getData" parameterType="int" resultType="com.gura.boot07.gallery.dto.GalleryDto">
+      	select num,writer,caption,imagePath,regdate
+      	from board_gallery
+      	where num=#{int}
+    </select>
+</mapper>

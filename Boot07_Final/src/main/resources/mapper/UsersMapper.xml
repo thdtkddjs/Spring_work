@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="users">
+	<insert id="insert" parameterType="com.gura.boot07.users.dto.UsersDto">
+		insert into users
+		(id, pwd, email, regdate)
+		values( #{id}, #{pwd}, #{email}, sysdate)
+	</insert>
+	
+	<update id="updatePwd" parameterType="com.gura.boot07.users.dto.UsersDto">
+		update users
+		set pwd=#{newPwd}
+		where id=#{id}
+	</update>
+	<!-- 
+		아래 외에도 jdbcType=VARCHAR로도 nullpointexception을 제거할 수 있다.
+		jdbcType 종류
+		INTEGER, BIGINT, FLOAT, DOUBLE, VARCAHR
+	 -->
+	<update id="update" parameterType="com.gura.boot07.users.dto.UsersDto">
+		update users
+		set email=#{email} <if test="profile !=null">, profile=#{profile}</if>
+		where id=#{id}
+	</update>
+	
+	<delete id="delete" parameterType="String">
+		delete from users
+		where id=#{id}
+	</delete>
+	
+	<select id="getData" parameterType="String" resultType="com.gura.boot07.users.dto.UsersDto">
+		select id, pwd, profile, email, regdate
+		from users
+		where id=#{id}
+	</select>
+</mapper>
